@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+            width: 200px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <div id="select" class="custom-select">
+        <select id="select_change">
+            <option value="0">None</option>
+            <option value="1">First Name</option>
+            <option value="2">Last Name</option>
+        </select>
+        <img class="custom-arrow" src="arrow.svg">
+    </div>
+    <div id="alll" class="users">
+        <ul id="place-list">
+            <li id="1">
+                <a href="user1.html"><img src="https://reqres.in/img/faces/1-image.jpg" alt="person">
+                    <h1><span class="first_name">George</span> <span class="last_name">Bluth</span></h1>
+                </a>
+            </li>
+            <li id="2">
+                <a href="user2.html"><img src="https://reqres.in/img/faces/2-image.jpg" alt="person">
+                    <h1><span class="first_name">Janet</span> <span class="last_name">Weaver</span></h1>
+                </a>
+            </li>
+            <li id="3">
+                <a href="user3.html"><img src="https://reqres.in/img/faces/3-image.jpg" alt="person">
+                    <h1><span class="first_name">Emma</span> <span class="last_name">Wong</span></h1>
+                </a>
+            </li>
+            <li id="4">
+                <a href="user4.html"><img src="https://reqres.in/img/faces/4-image.jpg" alt="person">
+                    <h1><span class="first_name">Eve</span> <span class="last_name">Holt</span></h1>
+                </a>
+            </li>
+            <li id="5">
+                <a href="user5.html"><img src="https://reqres.in/img/faces/5-image.jpg" alt="person">
+                    <h1><span class="first_name">Charles</span> <span class="last_name">Morris</span></h1>
+                </a>
+            </li>
+            <li id="6">
+                <a href="user6.html"><img src="https://reqres.in/img/faces/6-image.jpg" alt="person">
+                    <h1><span class="first_name">Tracey</span> <span class="last_name">Ramos</span></h1>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function() {
+            let selectChange = document.getElementById("select_change");
+            const firstName = document.querySelectorAll('.first_name');
+            const lastName = document.querySelectorAll('.last_name');
+            var arrayFirstObject = [],
+                arrayFirstName = [],
+                arrayLastObject = [],
+                arrayLastName = [],
+                arraySequenceNum = [];
+            for (let i = 0; i < firstName.length; i++) {
+                arrayFirstObject[i] = {
+                    'id': firstName[i].parentNode.parentNode.parentNode.id,
+                    'firstName': firstName[i].innerText
+                }
+                arrayFirstName[i] = firstName[i].innerText;
+            }
+            for (let i = 0; i < lastName.length; i++) {
+                arrayLastObject[i] = {
+                    'id': lastName[i].parentNode.parentNode.parentNode.id,
+                    'lastName': lastName[i].innerText
+                }
+                arrayLastName[i] = lastName[i].innerText;
+            }
+            arrayFirstName.sort();
+            console.log(arrayFirstName);
+            arrayLastName.sort();
+            console.log(arrayLastName);
+            var arr = [],
+                list = document.getElementById('place-list'),
+                c = list.children,
+                l = c.length;
+            for (let i = 0; i < l; i++) arr[i] = c[i];
+            selectChange.onchange = function() {
+
+                if (selectChange.value == 0) {
+                    for (let i = 0; i < l; i++) {
+                        list.appendChild(arr[i]);
+                    }
+                }
+                if (selectChange.value == 1) {
+                    arrayFirstName.sort();
+                    for (let i = 0; i < l; i++) {
+                        for (let j = 0; j < l; j++) {
+                            console.log(arrayFirstName[i]);
+                            if (arrayFirstName[i] == arrayFirstObject[j]['firstName']) {
+                                let idValue = arrayFirstObject[j]['id']
+                                list.appendChild(arr[idValue - 1]);
+                            }
+                        }
+                    }
+                }
+                if (selectChange.value == 2) {
+                    for (i = 0; i < l; i++) {
+                        for (let j = 0; j < l; j++) {
+                            if (arrayLastName[i] == arrayLastObject[j]['lastName']) {
+                                let idValue = arrayLastObject[j]['id'];
+                                list.appendChild(arr[idValue - 1]);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
