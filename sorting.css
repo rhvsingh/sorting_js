@@ -171,3 +171,20 @@ a{
   }
 
 }
+.first_name{
+  color: orange;
+}
+.last_name{
+  color: orange;
+}
+
+.heading{
+  color: orange;
+  text-decoration: double;
+  text-transform: uppercase;
+}
+
+.custom-select{
+  color:orange;
+  font-weight: bold;
+}
